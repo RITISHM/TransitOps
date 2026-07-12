@@ -6,10 +6,25 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    if (name.trim().length < 2) newErrors.name = 'Name must be at least 2 characters long';
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) newErrors.email = 'Please enter a valid email address';
+    if (password.length < 6) newErrors.password = 'Password must be at least 6 characters long';
+    if (!role) newErrors.role = 'Please select a role';
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Registration attempt:', { name, email, password, role });
+    if (validate()) {
+      console.log('Registration attempt:', { name, email, password, role });
+      alert('Registration successful!'); // Mock success
+    }
   };
 
   return (
@@ -28,46 +43,64 @@ const Register = () => {
               <input
                 type="text"
                 id="name"
-                className="form-control"
+                className={`form-control ${errors.name ? 'input-error' : ''}`}
                 placeholder="Full Name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (errors.name) setErrors({...errors, name: ''});
+                }}
                 required
+                style={{ borderColor: errors.name ? '#ef4444' : undefined }}
               />
+              {errors.name && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{errors.name}</span>}
             </div>
 
             <div className="form-group">
               <input
                 type="email"
                 id="email"
-                className="form-control"
+                className={`form-control ${errors.email ? 'input-error' : ''}`}
                 placeholder="Email address"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (errors.email) setErrors({...errors, email: ''});
+                }}
                 required
+                style={{ borderColor: errors.email ? '#ef4444' : undefined }}
               />
+              {errors.email && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{errors.email}</span>}
             </div>
 
             <div className="form-group">
               <input
                 type="password"
                 id="password"
-                className="form-control"
+                className={`form-control ${errors.password ? 'input-error' : ''}`}
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (errors.password) setErrors({...errors, password: ''});
+                }}
                 required
+                style={{ borderColor: errors.password ? '#ef4444' : undefined }}
               />
+              {errors.password && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{errors.password}</span>}
             </div>
 
             <div className="form-group">
               <select
                 id="role"
-                className="form-control"
+                className={`form-control ${errors.role ? 'input-error' : ''}`}
                 value={role}
-                onChange={(e) => setRole(e.target.value)}
+                onChange={(e) => {
+                  setRole(e.target.value);
+                  if (errors.role) setErrors({...errors, role: ''});
+                }}
                 required
-                style={{ appearance: 'auto', WebkitAppearance: 'none' }}
+                style={{ appearance: 'auto', WebkitAppearance: 'none', borderColor: errors.role ? '#ef4444' : undefined }}
               >
                 <option value="" disabled>Select Role (RBAC)</option>
                 <option value="Fleet Manager">Fleet Manager</option>
@@ -75,6 +108,7 @@ const Register = () => {
                 <option value="Safety Officer">Safety Officer</option>
                 <option value="Financial Analyst">Financial Analyst</option>
               </select>
+              {errors.role && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{errors.role}</span>}
             </div>
 
             <button type="submit" className="btn btn-primary" style={{ marginTop: '24px' }}>
