@@ -180,5 +180,9 @@ Desktop.ini
 *.sln
 *.sw?
 
-TransitOps_Gap_Analysis_and_POA.md
-Transitops - smart transport operations platform  - 8 hours.png
+# Local environment configs / secrets
+.env
+.env.local
+.env.*.local
+application-local.properties
+/context
