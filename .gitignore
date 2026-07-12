@@ -66,3 +66,4 @@ ehthumbs.db
 .env.local
 .env.*.local
 application-local.properties
+/context
