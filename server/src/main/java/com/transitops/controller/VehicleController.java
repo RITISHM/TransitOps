@@ -83,12 +83,14 @@ public class VehicleController {
      *   <li>{@code vehicleType} — filter by vehicle type enum (TRUCK, VAN, etc.)</li>
      *   <li>{@code status} — filter by operational status (AVAILABLE, ON_TRIP, etc.)</li>
      *   <li>{@code regionId} — filter by assigned region</li>
+     *   <li>{@code maintenanceDueWithinDays} — filter for upcoming maintenance (gap #13)</li>
      * </ul>
      *
-     * @param vehicleType optional vehicle type filter
-     * @param status      optional status filter
-     * @param regionId    optional region ID filter
-     * @param pageable    pagination/sorting (page, size, sort query params)
+     * @param vehicleType              optional vehicle type filter
+     * @param status                   optional status filter
+     * @param regionId                 optional region ID filter
+     * @param maintenanceDueWithinDays optional upcoming maintenance filter
+     * @param pageable                 pagination/sorting (page, size, sort query params)
      * @return page of vehicle response DTOs
      */
     @GetMapping
@@ -97,10 +99,11 @@ public class VehicleController {
             @RequestParam(required = false) VehicleType vehicleType,
             @RequestParam(required = false) String status,
             @RequestParam(required = false) Long regionId,
+            @RequestParam(required = false) Integer maintenanceDueWithinDays,
             Pageable pageable) {
         // Convert enum to its String name for the Specification-based query
         String vehicleTypeStr = (vehicleType != null) ? vehicleType.name() : null;
-        return vehicleService.list(vehicleTypeStr, status, regionId, pageable);
+        return vehicleService.list(vehicleTypeStr, status, regionId, maintenanceDueWithinDays, pageable);
     }
 
 

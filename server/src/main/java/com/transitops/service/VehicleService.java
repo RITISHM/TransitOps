@@ -15,6 +15,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 /**
  * Service layer for Vehicle management operations.
  *
@@ -101,17 +103,17 @@ public class VehicleService {
      * Returns a paginated, optionally filtered list of vehicles.
      *
      * <p>Supports the dashboard requirement (PDF §3.2) to filter vehicles by type,
-     * status, and region. Uses JPA Specifications so filters compose dynamically —
-     * only non-null filter parameters contribute to the WHERE clause.</p>
+     * status, region, and upcoming maintenance due.</p>
      *
-     * @param vehicleType optional filter — matches vehicles.vehicle_type exactly
-     * @param status      optional filter — matches vehicles.status exactly
-     * @param regionId    optional filter — matches vehicles.region_id exactly
-     * @param pageable    pagination and sorting parameters
+     * @param vehicleType              optional filter — matches vehicles.vehicle_type exactly
+     * @param status                   optional filter — matches vehicles.status exactly
+     * @param regionId                 optional filter — matches vehicles.region_id exactly
+     * @param maintenanceDueWithinDays optional filter — matches vehicles due for maintenance within this many days, or if current odometer >= due odometer
+     * @param pageable                 pagination and sorting parameters
      * @return page of vehicle response DTOs
      */
     @Transactional(readOnly = true)
-    public Page<VehicleResponseDTO> list(String vehicleType, String status, Long regionId, Pageable pageable) {
+    public Page<VehicleResponseDTO> list(String vehicleType, String status, Long regionId, Integer maintenanceDueWithinDays, Pageable pageable) {
         Specification<Vehicle> spec = Specification.where(null);
 
         if (vehicleType != null) {
@@ -122,6 +124,13 @@ public class VehicleService {
         }
         if (regionId != null) {
             spec = spec.and((root, query, cb) -> cb.equal(root.get("region").get("id"), regionId));
+        }
+        if (maintenanceDueWithinDays != null) {
+            LocalDate targetDate = LocalDate.now().plusDays(maintenanceDueWithinDays);
+            spec = spec.and((root, query, cb) -> cb.or(
+                    cb.lessThanOrEqualTo(root.get("nextMaintenanceDueDate"), targetDate),
+                    cb.greaterThanOrEqualTo(root.get("currentOdometer"), root.get("nextMaintenanceDueOdometer"))
+            ));
         }
 
         return vehicleRepository.findAll(spec, pageable).map(VehicleResponseDTO::fromEntity);
