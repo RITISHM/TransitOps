@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Custom exception class representing a GlobalExceptionHandler.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

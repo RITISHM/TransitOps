@@ -15,6 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Global security configuration for the application.
+ * Configures stateless JWT authentication, password encoding, and HTTP request authorization rules.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -23,6 +27,14 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final CustomUserDetailsService userDetailsService;
 
+    /**
+     * Configures the main security filter chain.
+     * Sets up stateless session management, disables CSRF, and configures route-level authorization.
+     *
+     * @param http The HttpSecurity builder
+     * @return The configured SecurityFilterChain
+     * @throws Exception If an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
@@ -34,11 +46,22 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Provides the password encoder bean used for hashing and verifying passwords.
+     *
+     * @return A BCryptPasswordEncoder instance
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Provides the AuthenticationManager bean, configuring it to use the custom UserDetailsService
+     * and the BCrypt password encoder.
+     *
+     * @return The configured AuthenticationManager
+     */
     @Bean
     public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

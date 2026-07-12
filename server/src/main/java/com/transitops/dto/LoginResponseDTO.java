@@ -1,6 +1,9 @@
 package com.transitops.dto;
 
 
+/**
+ * Data Transfer Object (DTO) containing LoginResponseDTO data.
+ */
 public class LoginResponseDTO {
     private String token;
     private Long userId;

@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Domain entity representing a Trip in the TransitOps system.
+ */
 @Entity
 @Table(name = "trips")
 public class Trip {

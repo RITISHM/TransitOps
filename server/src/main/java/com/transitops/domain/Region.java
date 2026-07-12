@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Domain entity representing a Region in the TransitOps system.
+ */
 @Entity
 @Table(name = "regions")
 public class Region {

@@ -12,6 +12,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.function.Function;
 
+/**
+ * Service class for handling JSON Web Token (JWT) operations.
+ * Responsible for generating, validating, and extracting claims from tokens.
+ */
 @Service
 public class JwtService {
 
@@ -26,6 +30,12 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    /**
+     * Extracts the username (subject) from the JWT token.
+     *
+     * @param token The JWT token string
+     * @return The username extracted from the token
+     */
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -43,6 +53,13 @@ public class JwtService {
                 .getPayload();
     }
 
+    /**
+     * Generates a new JWT token for a given user.
+     * Includes custom claims such as userId and role.
+     *
+     * @param user The user for whom the token is generated
+     * @return The generated JWT token string
+     */
     public String generateToken(User user) {
         return Jwts.builder()
                 .subject(user.getEmail())
@@ -54,6 +71,14 @@ public class JwtService {
                 .compact();
     }
 
+    /**
+     * Validates whether a given token is valid for a specific user email.
+     * Checks both the username match and expiration date.
+     *
+     * @param token The JWT token string
+     * @param userEmail The email to validate against
+     * @return true if valid, false otherwise
+     */
     public boolean isTokenValid(String token, String userEmail) {
         final String username = extractUsername(token);
         return (username.equals(userEmail)) && !isTokenExpired(token);

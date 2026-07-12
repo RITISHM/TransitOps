@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Spring Data JPA repository interface for managing Driver entities.
+ */
 @Repository
 public interface DriverRepository extends JpaRepository<Driver, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)

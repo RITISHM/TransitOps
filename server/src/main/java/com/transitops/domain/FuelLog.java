@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Domain entity representing a FuelLog in the TransitOps system.
+ */
 @Entity
 @Table(name = "fuel_logs")
 public class FuelLog {

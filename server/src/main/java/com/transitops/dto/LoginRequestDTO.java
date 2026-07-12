@@ -3,6 +3,9 @@ package com.transitops.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+/**
+ * Data Transfer Object (DTO) containing LoginRequestDTO data.
+ */
 public class LoginRequestDTO {
 
     @NotBlank(message = "Email is required")

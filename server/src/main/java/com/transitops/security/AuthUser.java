@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Represents the AuthUser class component.
+ */
 public class AuthUser implements UserDetails {
 
     private final User user;

@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Domain entity representing a User in the TransitOps system.
+ */
 @Entity
 @Table(name = "users")
 public class User {

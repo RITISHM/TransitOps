@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Domain entity representing a MaintenanceLog in the TransitOps system.
+ */
 @Entity
 @Table(name = "maintenance_logs")
 public class MaintenanceLog {

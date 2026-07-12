@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Spring Data JPA repository interface for managing Vehicle entities.
+ */
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
