@@ -155,8 +155,8 @@ public class DriverController {
     @PreAuthorize("hasRole('SAFETY_OFFICER')")
     public ResponseEntity<DriverResponseDTO> updateSafetyScore(
             @PathVariable Long id,
-            @RequestParam BigDecimal safetyScore) {
-        DriverResponseDTO updated = driverService.updateSafetyScore(id, safetyScore);
+            @Valid @RequestBody com.transitops.dto.SafetyScoreUpdateDTO dto) {
+        DriverResponseDTO updated = driverService.updateSafetyScore(id, dto);
         return ResponseEntity.ok(updated);
     }
 }

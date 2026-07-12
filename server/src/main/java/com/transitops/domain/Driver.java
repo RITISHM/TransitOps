@@ -39,6 +39,9 @@ public class Driver {
     @Column(name = "safety_score", nullable = false, precision = 5, scale = 2)
     private BigDecimal safetyScore = new BigDecimal("100.00");
 
+    @Column(name = "safety_audit_notes", columnDefinition = "TEXT")
+    private String safetyAuditNotes;
+
     @Column(nullable = false, length = 20)
     private String status;
 
@@ -109,6 +112,10 @@ public class Driver {
         return safetyScore;
     }
 
+    public String getSafetyAuditNotes() {
+        return safetyAuditNotes;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -151,6 +158,10 @@ public class Driver {
 
     public void setSafetyScore(BigDecimal safetyScore) {
         this.safetyScore = safetyScore;
+    }
+
+    public void setSafetyAuditNotes(String safetyAuditNotes) {
+        this.safetyAuditNotes = safetyAuditNotes;
     }
 
     public void setStatus(String status) {

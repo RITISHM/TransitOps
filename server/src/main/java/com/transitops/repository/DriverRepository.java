@@ -52,5 +52,11 @@ public interface DriverRepository extends JpaRepository<Driver, Long>, JpaSpecif
      * Useful for resolving the authenticated user's driver profile.
      */
     Optional<Driver> findByUserId(Long userId);
+
+    /**
+     * Counts drivers whose status is in the given list.
+     * Used for the Dashboard "Drivers On Duty" KPI.
+     */
+    long countByStatusIn(List<String> statuses);
 }
 

@@ -46,5 +46,10 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
      * Counts trips by status — used for dashboard KPIs.
      */
     long countByStatus(String status);
+
+    /**
+     * Finds all trips for a specific vehicle — used for reporting.
+     */
+    List<Trip> findByVehicleId(Long vehicleId);
 }
 
