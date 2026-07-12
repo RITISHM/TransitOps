@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
+=======
 import api from '../services/api';
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
 
 // --- MOCK DATA ---
 const MOCK_TRIPS = [
@@ -39,10 +42,15 @@ const Dashboard = () => {
           <h3 className="section-subtitle">Active Fleet</h3>
           <div className="hero-card">
             <div className="hero-card-header">
+<<<<<<< HEAD
+              <div className="hero-value">53 Vehicles</div>
+              <div className="hero-badge">On Route 18</div>
+=======
               <div className="hero-value">{kpis?.activeVehicles || 0} Vehicles</div>
               <div className="hero-badge" style={{ backgroundColor: 'var(--color-accent-active)' }}>
                 {kpis?.fleetUtilizationPercentage || 0}% Utilized
               </div>
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
             </div>
             <p className="hero-subtext">Total active fleet balance</p>
             
@@ -54,43 +62,82 @@ const Dashboard = () => {
                 <circle cx="320" cy="10" r="4" fill="#3b82f6" />
               </svg>
             </div>
+<<<<<<< HEAD
+            <div className="chart-times">
+              <span>1H</span><span>24H</span><span className="active">1W</span><span>1M</span><span>1Y</span><span>ALL</span>
+            </div>
+=======
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
           </div>
         </div>
 
         <div className="metrics-col-right">
           <h3 className="section-subtitle flex-between">
             Key Metrics
+<<<<<<< HEAD
+            <button className="icon-btn-small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+            </button>
+=======
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
           </h3>
           <div className="small-cards-grid">
             <div className="metric-card bg-purple">
               <div className="card-top">
+<<<<<<< HEAD
+                <h4>18 Trips</h4>
+                <button className="more-btn">⋮</button>
+=======
                 <h4>{kpis?.activeTrips || 0} Trips</h4>
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
               </div>
               <p>Active</p>
               <div className="card-bottom">
                 <span className="icon-box">T</span>
+<<<<<<< HEAD
+                <span className="change positive">+1.14%</span>
+=======
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
               </div>
             </div>
             
             <div className="metric-card bg-green">
               <div className="card-top">
+<<<<<<< HEAD
+                <h4>26 Drivers</h4>
+                <button className="more-btn">⋮</button>
+=======
                 <h4>{kpis?.driversOnDuty || 0} Drivers</h4>
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
               </div>
               <p>On Duty</p>
               <div className="card-bottom">
                 <span className="icon-box">D</span>
+<<<<<<< HEAD
+                <span className="change positive">+0.31%</span>
+=======
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
               </div>
             </div>
 
             <div className="metric-card bg-yellow">
               <div className="card-top">
+<<<<<<< HEAD
+                <h4>05 Issues</h4>
+                <button className="more-btn">⋮</button>
+=======
                 <h4 style={{ color: (kpis?.vehiclesInMaintenance || 0) > 0 ? 'var(--color-accent-alert)' : 'inherit' }}>
                   {kpis?.vehiclesInMaintenance || 0} Issues
                 </h4>
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
               </div>
               <p>Maintenance</p>
               <div className="card-bottom">
                 <span className="icon-box">M</span>
+<<<<<<< HEAD
+                <span className="change negative">-0.27%</span>
+=======
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
               </div>
             </div>
           </div>

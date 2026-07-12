@@ -1,4 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
+
+const Analytics = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+      
+=======
 import { useAuthStore } from '../store/authStore';
 
 const Analytics = () => {
@@ -36,6 +43,7 @@ const Analytics = () => {
         )}
       </div>
 
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
       {/* METRIC CARDS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
         <div className="panel" style={{ padding: '24px' }}>
