@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -13,7 +14,7 @@ const Login = () => {
       setError('Invalid credentials. Account locked after 5 failed attempts.');
     } else {
       setError('');
-      console.log('Login attempt:', { email, password, role });
+      navigate('/dashboard');
     }
   };
 
