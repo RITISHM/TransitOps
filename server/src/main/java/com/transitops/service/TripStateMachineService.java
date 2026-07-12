@@ -521,14 +521,15 @@ public class TripStateMachineService {
         Trip trip = tripRepository.findById(tripId)
                 .orElseThrow(() -> new ResourceNotFoundException("Trip not found with ID: " + tripId));
 
+        // Row-level authorization (gap #3 fix — HLD promised this but it was never implemented)
+        // Moved to the top (Step 7.1) to fail fast on unauthorized access before revealing trip state
+        assertCallerCanActOnTrip(trip, currentUser);
+
         // State guard: refuelling only makes sense for an active trip
         if (!TripStatus.DISPATCHED.name().equals(trip.getStatus())) {
             throw new IllegalStateException(
                     "Refuelling can only be logged for DISPATCHED trips. Current status: " + trip.getStatus());
         }
-
-        // Row-level authorization (gap #3 fix — HLD promised this but it was never implemented)
-        assertCallerCanActOnTrip(trip, currentUser);
 
         // Validate the checkpoint exists and belongs to this trip
         TripCheckpoint checkpoint = checkpointRepository.findById(dto.getCheckpointId())
