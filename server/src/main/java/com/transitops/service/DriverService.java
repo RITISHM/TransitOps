@@ -5,6 +5,7 @@ import com.transitops.domain.User;
 import com.transitops.dto.DriverCreateDTO;
 import com.transitops.dto.DriverResponseDTO;
 import com.transitops.dto.DriverUpdateDTO;
+import com.transitops.dto.SafetyScoreUpdateDTO;
 import com.transitops.enums.DriverStatus;
 import com.transitops.exception.DuplicateResourceException;
 import com.transitops.exception.ResourceNotFoundException;
@@ -249,15 +250,16 @@ public class DriverService {
      * Full scoring logic (incident-based calculation, threshold alerts) will be
      * implemented in Phase 9.</p>
      *
-     * @param id         the driver ID
-     * @param safetyScore the new safety score value (0.00 – 100.00)
+     * @param id  the driver ID
+     * @param dto the new safety score and reason
      * @return response DTO of the updated driver
      */
     @Transactional
-    public DriverResponseDTO updateSafetyScore(Long id, BigDecimal safetyScore) {
+    public DriverResponseDTO updateSafetyScore(Long id, SafetyScoreUpdateDTO dto) {
         Driver driver = driverRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Driver not found with ID: " + id));
 
+        BigDecimal safetyScore = dto.getNewScore();
         // Basic range validation
         if (safetyScore.compareTo(BigDecimal.ZERO) < 0
                 || safetyScore.compareTo(new BigDecimal("100.00")) > 0) {
@@ -265,6 +267,14 @@ public class DriverService {
         }
 
         driver.setSafetyScore(safetyScore);
+        
+        if (dto.getReason() != null) {
+            // Append the reason to the audit notes
+            String currentNotes = driver.getSafetyAuditNotes() != null ? driver.getSafetyAuditNotes() : "";
+            String newNote = "[" + java.time.LocalDateTime.now() + "] Score updated to " + safetyScore + ". Reason: " + dto.getReason() + "\n";
+            driver.setSafetyAuditNotes(currentNotes + newNote);
+        }
+        
         Driver saved = driverRepository.save(driver);
         return DriverResponseDTO.fromEntity(saved);
     }
