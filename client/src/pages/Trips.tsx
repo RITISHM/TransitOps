@@ -200,7 +200,7 @@ const Trips = () => {
           
           <div className="live-board-list" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {trips.map(trip => (
-              <div key={trip.id} className="panel" style={{ padding: '24px', border: '1px solid var(--border-color)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+              <div key={trip.id} className="panel" style={{ padding: '24px' }}>
                 <div className="flex-between" style={{ marginBottom: '16px' }}>
                   <span style={{ fontWeight: 600, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{trip.id}</span>
                   <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>

@@ -753,5 +753,5 @@ select.form-control {
 .panel {
   background-color: var(--surface-color);
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  border: 1px solid var(--border-color);
 }

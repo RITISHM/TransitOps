@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Fleet from './pages/Fleet';
 import Trips from './pages/Trips';
 import Drivers from './pages/Drivers';
+import Maintenance from './pages/Maintenance';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/fleet" element={<Fleet />} />
           <Route path="/trips" element={<Trips />} />
           <Route path="/drivers" element={<Drivers />} />
+          <Route path="/maintenance" element={<Maintenance />} />
         </Route>
       </Routes>
     </Router>
