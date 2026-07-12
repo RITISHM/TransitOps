@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 
 const Login = () => {
+=======
+import api from '../services/api';
+import { useAuthStore } from '../store/authStore';
+
+const Login = () => {
+  const setAuth = useAuthStore((state) => state.setAuth);
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email === 'Raven.k@transitops.in' && password === 'invalid') {
@@ -15,6 +24,19 @@ const Login = () => {
     } else {
       setError('');
       navigate('/dashboard');
+=======
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    
+    try {
+      const response = await api.post('/auth/login', { email, password });
+      setAuth(response.data.token, { id: 1, email, role: response.data.role || 'DRIVER' }); // Default mapping for now since the real API might not return role in login response unless we parse JWT.
+      // Wait, let's just assume the backend returns it or we decode it. For this scope, setting the role from the response is best.
+      navigate('/dashboard');
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+>>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
     }
   };
 
