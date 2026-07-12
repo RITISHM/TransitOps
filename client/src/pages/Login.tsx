@@ -78,22 +78,7 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="form-group">
-              <select
-                id="role"
-                className="form-control"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                style={{ appearance: 'auto', WebkitAppearance: 'none' }}
-                required
-              >
-                <option value="" disabled>Select Role (RBAC)</option>
-                <option value="Fleet Manager">Fleet Manager</option>
-                <option value="Dispatcher">Dispatcher</option>
-                <option value="Safety Officer">Safety Officer</option>
-                <option value="Financial Analyst">Financial Analyst</option>
-              </select>
-            </div>
+            {/* Role dropdown removed since backend automatically assigns role based on user credentials */}
 
             <div className="form-group flex-between" style={{ marginTop: '20px', marginBottom: '24px' }}>
               <label className="checkbox-label">
