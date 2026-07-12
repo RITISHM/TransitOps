@@ -1,11 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-
-const Analytics = () => {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-      
-=======
 import { useAuthStore } from '../store/authStore';
 
 const Analytics = () => {
@@ -32,7 +25,7 @@ const Analytics = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-      
+
       {/* HEADER & EXPORT */}
       <div className="flex-between">
         <h2>Analytics & Reports</h2>
@@ -43,7 +36,6 @@ const Analytics = () => {
         )}
       </div>
 
->>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
       {/* METRIC CARDS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
         <div className="panel" style={{ padding: '24px' }}>
@@ -63,32 +55,32 @@ const Analytics = () => {
           <div style={{ fontSize: '1.75rem', fontWeight: 700 }}>14.2%</div>
         </div>
       </div>
-      
+
       <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '-24px', fontStyle: 'italic', paddingLeft: '8px' }}>
         ROI = (Revenue - (Maintenance + Fuel)) / Acquisition Cost
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '32px' }}>
-        
+
         {/* MONTHLY REVENUE */}
         <div className="panel" style={{ padding: '32px' }}>
           <h3 style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '32px' }}>MONTHLY REVENUE</h3>
-          
+
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px', height: '220px', borderBottom: '1px solid var(--border-color)', paddingBottom: '8px' }}>
             {/* Mock bars for the chart */}
             {[40, 55, 50, 75, 70, 90, 85].map((height, i) => (
-              <div key={i} style={{ 
-                flex: 1, 
-                height: `${height}%`, 
-                backgroundColor: '#3b82f6', 
-                borderTopLeftRadius: '4px', 
+              <div key={i} style={{
+                flex: 1,
+                height: `${height}%`,
+                backgroundColor: '#3b82f6',
+                borderTopLeftRadius: '4px',
                 borderTopRightRadius: '4px',
                 opacity: 0.9,
                 transition: 'opacity 0.2s',
                 cursor: 'pointer'
-              }} 
-              onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-              onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}
+              }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}
               />
             ))}
           </div>
@@ -106,7 +98,7 @@ const Analytics = () => {
         {/* TOP COSTLIEST VEHICLES */}
         <div className="panel" style={{ padding: '32px' }}>
           <h3 style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '32px' }}>TOP COSTLIEST VEHICLES</h3>
-          
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.85rem', fontWeight: 600 }}>

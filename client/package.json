@@ -10,17 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "react-router-dom": "^7.18.1"
-=======
     "axios": "^1.18.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1",
     "zustand": "^5.0.14"
->>>>>>> c04aa2e22828387e4ac65ad6ee4adfbfd54d01d5
   },
   "devDependencies": {
     "@types/node": "^24.13.2",
