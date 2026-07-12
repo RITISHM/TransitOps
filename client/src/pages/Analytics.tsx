@@ -1,9 +1,41 @@
 import React from 'react';
+import { useAuthStore } from '../store/authStore';
 
 const Analytics = () => {
+  const { role } = useAuthStore();
+  const canExport = role === 'FLEET_MANAGER' || role === 'FINANCIAL_ANALYST';
+
+  const handleExport = () => {
+    // We open the window with the export API, the backend requires token, 
+    // so it's better to fetch as Blob and download.
+    import('../services/api').then(({ default: api }) => {
+      api.get('/reports/export?type=vehicle-financials&format=csv', { responseType: 'blob' })
+        .then((res) => {
+          const url = window.URL.createObjectURL(new Blob([res.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'vehicle-financials.csv');
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        })
+        .catch(err => console.error("Export failed", err));
+    });
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       
+      {/* HEADER & EXPORT */}
+      <div className="flex-between">
+        <h2>Analytics & Reports</h2>
+        {canExport && (
+          <button onClick={handleExport} className="btn btn-primary" style={{ width: 'auto', marginTop: 0 }}>
+            Export CSV
+          </button>
+        )}
+      </div>
+
       {/* METRIC CARDS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
         <div className="panel" style={{ padding: '24px' }}>

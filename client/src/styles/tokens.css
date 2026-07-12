@@ -1,0 +1,23 @@
+:root {
+  --color-accent-active: #B39DDB;   /* Muted Purple — active flows, "On Trip" tags */
+  --color-accent-alert:  #FFDAB9;   /* Soft Peach — maintenance due, expired docs, overload warnings */
+  --font-primary: 'DM Sans', sans-serif;
+  
+  /* Light theme variables */
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-surface: #f2f7f2;
+}
+
+[data-theme="dark"] {
+  --color-bg: #121212; 
+  --color-text: #EDEDED;
+  --color-surface: #1e1e1e;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

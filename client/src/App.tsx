@@ -10,6 +10,7 @@ import Maintenance from './pages/Maintenance';
 import FuelExpenses from './pages/FuelExpenses';
 import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
   return (
@@ -17,15 +18,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/fleet" element={<Fleet />} />
-          <Route path="/trips" element={<Trips />} />
-          <Route path="/drivers" element={<Drivers />} />
-          <Route path="/maintenance" element={<Maintenance />} />
-          <Route path="/fuel" element={<FuelExpenses />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/settings" element={<Settings />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/fleet" element={<Fleet />} />
+            <Route path="/trips" element={<Trips />} />
+            <Route path="/drivers" element={<Drivers />} />
+            <Route path="/maintenance" element={<Maintenance />} />
+            <Route path="/fuel" element={<FuelExpenses />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
         </Route>
       </Routes>
     </Router>
