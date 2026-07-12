@@ -749,3 +749,9 @@ select.form-control {
   font-size: 0.9rem;
   color: var(--text-primary);
 }
+
+.panel {
+  background-color: var(--surface-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
