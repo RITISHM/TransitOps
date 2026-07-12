@@ -39,5 +39,15 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long>, JpaSpec
      * Finds all vehicles with the given operational status.
      */
     List<Vehicle> findByStatus(String status);
+
+    /**
+     * Counts vehicles with the given operational status.
+     */
+    long countByStatus(String status);
+
+    /**
+     * Counts vehicles whose status is NOT the given value (e.g. not RETIRED).
+     */
+    long countByStatusNot(String status);
 }
 
